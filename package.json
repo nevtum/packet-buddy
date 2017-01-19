@@ -1,0 +1,14 @@
+{
+  "name": "data-buddy",
+  "version": "1.0.0",
+  "description": "A simple utility to translate NSW gaming protocol data into human readable output",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "author": "Neville Tummon",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
