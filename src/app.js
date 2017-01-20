@@ -3,8 +3,10 @@ path = require('path');
 
 app = express();
 
+app.use(express.static('public'));
+
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, './static/index.html'))
+    res.sendFile(path.join(__dirname, './index.html'))
 });
 
 app.post('/api/parse', function(req, res) {
