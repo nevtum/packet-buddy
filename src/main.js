@@ -1,10 +1,9 @@
 
-var decoder = require('./decoder');
+var decoder = require('./xseries/decoder');
 var fs = require('fs');
-var analyzeconfigs = require('./analyzeconfigs')
+var analyzeconfigs = require('./xseries/analyzeconfigs')
 
 var contents = fs.readFileSync('datablocks.txt', 'utf8').toString();
-// console.log(contents);
 
 var handler = function(error, xpacket) {
 	if (error) {
