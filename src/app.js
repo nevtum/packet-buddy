@@ -3,7 +3,11 @@ path = require('path');
 
 app = express();
 
-app.use(express.static('public'));
+var isProduction = process.env.NODE_ENV === 'production';
+var port = isProduction ? process.env.PORT : 3000;
+var publicPath = path.resolve(__dirname, 'public');
+
+app.use(express.static(publicPath));
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, './index.html'))
@@ -13,12 +17,11 @@ app.post('/api/parse', function(req, res) {
 
 });
 
-var portNr = 5000;
-app.listen(portNr, function(err) {
+app.listen(port, function(err) {
     if (err) {
         console.log(err);
     }
     else {
-        console.log("listening on port " + portNr);
+        console.log("listening on port " + port);
     }
 });
