@@ -13,10 +13,6 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, './index.html'));
 });
 
-app.post('/api/parse', function(req, res) {
-
-});
-
 app.listen(port, function(err) {
     if (err) {
         console.log(err);
