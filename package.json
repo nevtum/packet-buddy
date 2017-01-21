@@ -4,8 +4,9 @@
   "description": "A simple utility to translate NSW gaming protocol data into human readable output",
   "main": "src/app.js",
   "scripts": {
-    "test": "node src/test.js",
+    "test": "mocha --watch src/unittests/test.js",
     "start": "npm-run-all --parallel build server",
+    "testrun": "node src/program.js",
     "server": "node src/server.js",
     "build": "webpack --watch"
   },
@@ -20,5 +21,8 @@
     "lodash": "^4.17.4",
     "npm-run-all": "^4.0.1",
     "webpack": "^1.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
   }
 }
