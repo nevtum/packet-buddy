@@ -4,7 +4,7 @@
   "description": "A simple utility to translate NSW gaming protocol data into human readable output",
   "main": "src/app.js",
   "scripts": {
-    "test": "node src/main.js",
+    "test": "node src/test.js",
     "start": "node src/app.js",
     "build": "webpack"
   },
