@@ -1,5 +1,5 @@
 {
-  "name": "data-buddy",
+  "name": "packet-buddy",
   "version": "1.0.0",
   "description": "A simple utility to translate NSW gaming protocol data into human readable output",
   "main": "src/app.js",

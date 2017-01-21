@@ -1,7 +1,7 @@
 
 var decoder = require('./xseries/decoder');
 var fs = require('fs');
-var analyzeconfigs = require('./xseries/analyzeconfigs')
+var analyzeconfigs = require('./xseries/analyzeconfigs');
 
 var contents = fs.readFileSync('datablocks.txt', 'utf8').toString();
 
