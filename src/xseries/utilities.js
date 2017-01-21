@@ -1,6 +1,6 @@
 
 var ChecksumCalculator = {
-    calculateCRC16(array) {
+    calculateChecksum(array) {
         var mod = 0x00;
 
         array.forEach(function(element) {
