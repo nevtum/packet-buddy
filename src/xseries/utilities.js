@@ -4,7 +4,6 @@ var ChecksumCalculator = {
         var mod = 0x00;
 
         array.forEach(function(element) {
-            // console.log(element);
             mod = mod ^ element;
         }, this);
         

@@ -25,16 +25,12 @@ class XPacket {
     }
 
     CalculateValidCRC(byteArray) {
-
         var array = this.byteArray.slice(1, 126);
         var expected = this.byteArray.slice(126, 128);
-
         var checksum = calc.calculateCRC16(array);
-
-        console.log(checksum);
-        console.log(expected);
-        // To do        
-        return true;
+        var validCRC = _.isEqual(checksum, expected);
+        // console.log(validCRC);
+        return validCRC;
     }
 
     getBytes(startByte, endByte) {
