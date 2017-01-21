@@ -5,8 +5,9 @@
   "main": "src/app.js",
   "scripts": {
     "test": "node src/test.js",
-    "start": "node src/server.js",
-    "build": "webpack"
+    "start": "npm-run-all --parallel build server",
+    "server": "node src/server.js",
+    "build": "webpack --watch"
   },
   "author": "Neville Tummon",
   "license": "MIT",
@@ -17,6 +18,7 @@
     "babel-preset-react": "^6.22.0",
     "express": "^4.14.0",
     "lodash": "^4.17.4",
+    "npm-run-all": "^4.0.1",
     "webpack": "^1.14.0"
   }
 }
