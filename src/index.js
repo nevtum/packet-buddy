@@ -1,5 +1,5 @@
-import decoder from './xseries/decoder';
 import React from 'react';
 import { render } from 'react-dom';
+import MainLayout from './Components/MainLayout';
 
-render(<h1>Hello React!</h1>, document.getElementById('app'))
+render(<MainLayout />, document.getElementById('app'));
