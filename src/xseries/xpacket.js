@@ -110,7 +110,11 @@ class XPacket {
         return {
             configData: {
                 version: this._version(2, 3),
-                MultiGameIndication: this.getBytes(14, 15).asBCD().join(""),
+                MultiGameIndication: {
+                    byteRange: 14 + '-' + 15,
+                    hex: this.getBytes(14, 15).rawData(),
+                    value: this.getBytes(14, 15).asBCD().join(""),
+                },
                 BCV: this._currency(84, 85),
                 PID1: this._ASCII(87, 94),
                 PID2: this._ASCII(95, 102),
