@@ -1,3 +1,5 @@
 import decoder from './xseries/decoder';
+import React from 'react';
+import { render } from 'react-dom';
 
-console.log("hellow webpack!");
+render(<h1>Hello React!</h1>, document.getElementById('app'))

@@ -20,6 +20,8 @@
     "express": "^4.14.0",
     "lodash": "^4.17.4",
     "npm-run-all": "^4.0.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "webpack": "^1.14.0"
   },
   "devDependencies": {
