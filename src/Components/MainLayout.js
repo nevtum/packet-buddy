@@ -42,19 +42,27 @@ class MainLayout extends React.Component {
         });
     }
 
-    renderControls() {
-        if (this.state.editMode == true) {
-            return (
-                <div id="controls">
-                    <a href="#" onClick={this.showReadMode}>Parse datablocks</a>
-                </div>
-            );
-        }
+    renderViewControls() {
+        return (
+            <div id="controls">
+                <a href="#" onClick={this.showReadMode}>Parse datablocks</a>
+            </div>
+        );
+    }
+
+    renderEditControls() {
         return (
             <div id="controls">
                 <a href="#" onClick={this.showEditMode}>Edit data</a>
             </div>
         );
+    }
+
+    renderControls() {
+        if (this.state.editMode == true) {
+            return this.renderViewControls();
+        }
+        return this.renderEditControls();
     }
 
     renderContent() {
@@ -70,7 +78,15 @@ class MainLayout extends React.Component {
             );
         }
 
-        return <pre>{JSON.stringify(this.state.decoded, null, 2)}</pre>   
+           return this.renderDecodedPackets();
+    }
+
+    renderDecodedPackets() {
+        return (
+            <div id="content">
+                <pre>{JSON.stringify(this.state.decoded, null, 2)}</pre>
+            </div>
+        );
     }
 
     render() {
