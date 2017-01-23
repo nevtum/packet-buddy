@@ -171,7 +171,11 @@ class XPacket {
     _MDBData() {
         return {
             configData: {
-                ManufacturerID: this.getBytes(2).asBCD().join(""),
+                ManufacturerID: {
+                    byteRange: "2",
+                    hex: this.getBytes(2).rawData(),
+                    value: this.getBytes(2).rawData()
+                } ,
             },
             meterData: {
                 // To do
