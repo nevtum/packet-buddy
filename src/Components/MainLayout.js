@@ -1,5 +1,6 @@
 import React from 'react';
 import decoder from '../xseries/decoder';
+import Packet from './Packet';
 
 class MainLayout extends React.Component {
     constructor(props, context) {
@@ -82,9 +83,14 @@ class MainLayout extends React.Component {
     }
 
     renderDecodedPackets() {
+
+        var packets = this.state.decoded.map(function(element, index) {
+            return <Packet key={index} data={element} />;
+        });
+        
         return (
             <div id="content">
-                <pre>{JSON.stringify(this.state.decoded, null, 2)}</pre>
+                {packets}
             </div>
         );
     }
