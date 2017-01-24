@@ -16,6 +16,20 @@ class MainLayout extends React.Component {
         this.onRawContentChanged = this.onRawContentChanged.bind(this);
         this.onSwitchReadMode = this.onSwitchReadMode.bind(this);
         this.onSwitchEditMode = this.onSwitchEditMode.bind(this);
+        this.onItemCollapsed = this.onItemCollapsed.bind(this);
+        this.onItemExpanded = this.onItemExpanded.bind(this);
+    }
+
+    onItemCollapsed(id) {
+        var { decoded } = this.state;
+        decoded[id].expanded = false;
+        this.setState({ decoded: decoded });
+    }
+
+    onItemExpanded(id) {
+        var { decoded } = this.state;
+        decoded[id].expanded = true;
+        this.setState({ decoded: decoded });
     }
 
     onRawContentChanged(e) {
@@ -36,10 +50,20 @@ class MainLayout extends React.Component {
             return;
         }
 
+        let decoded = decoder
+            .parseAll(this.state.raw)
+            .map(function(element, index) {
+                return {
+                    id: index,
+                    expanded: true,
+                    data: element
+                }
+            })
+
         this.setState({ 
             editMode: false,
             rawCache: this.state.raw,
-            decoded: decoder.parseAll(this.state.raw),
+            decoded: decoded,
         });
     }
 
@@ -83,9 +107,14 @@ class MainLayout extends React.Component {
     }
 
     renderDecodedPackets() {
-        var packets = this.state.decoded.map(function(element, index) {
-            return <Packet key={index} data={element} />;
-        });
+        let { decoded } = this.state;
+        var packets = decoded.map(function(element) {
+            return <Packet
+                        onViewCollapsed={this.onItemCollapsed}
+                        onViewExpanded={this.onItemExpanded}
+                        key={element.id}
+                        {...element} />;
+        }, this);
         
         return (
             <div id="content">

@@ -1,18 +1,8 @@
 import React from 'react';
 
-const Packet = function(props) {
-    let { data } = props;
+const PacketDetails = function(props) {
 
-    if (data.error) {
-        return (
-        <div className="packet error">
-            <p>{data.error}</p>
-        </div>
-        );
-    }
-
-    let classname = data.validCRC == true ? 
-        "packet" : "packet invalid";
+    let { data, expanded } = props;
 
     let configTabulated = Object.keys(data.configData).map(function(key, index) {
         return Object.assign({}, data.configData[key], { description: key });
@@ -20,15 +10,14 @@ const Packet = function(props) {
 
     let metersTabulated = Object.keys(data.meterData).map(function(key, element) {
         return Object.assign({}, data.meterData[key], { description: key });
-        
     });
 
+    if (!expanded) {
+        return <div/>
+    }
+
     return (
-        <div className={classname}>
-            <div className="summary">
-                <h4>{data.type}</h4>
-            </div>
-            <hr />
+        <div className="details">
             <div className="config">
                 <h5>Configuration data</h5>
                 <table>
@@ -76,6 +65,51 @@ const Packet = function(props) {
                     </tbody>
                 </table>
             </div>
+        </div>
+    );
+}
+
+const PacketHeader = function(props) {
+    let collapse = function(e) {
+        e.preventDefault();
+        props.onViewCollapsed(props.id);
+    }
+
+    let expand = function(e) {
+        e.preventDefault();
+        props.onViewExpanded(props.id);
+    }
+
+    let { id, data, expanded } = props;
+
+    if (!expanded) {
+        return <h3>{id+1}. <a href="#" onClick={expand}>{data.type}</a></h3>
+    }
+    else {
+        return <h3>{id+1}. <a href="#" onClick={collapse}>{data.type}</a></h3>
+    }
+}
+
+const Packet = function(props) {
+    let { data } = props;
+
+    if (data.error) {
+        return (
+            <div className="packet error">
+                <p>{data.error}</p>
+            </div>
+        );
+    }
+
+    let classname = data.validCRC == true ? 
+        "packet" : "packet invalid";
+
+    return (
+        <div className={classname}>
+            <div className="summary">
+                <PacketHeader {...props} />
+            </div>
+            <PacketDetails {...props} />
         </div>
     );
 }
