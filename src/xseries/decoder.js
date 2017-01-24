@@ -10,7 +10,7 @@ module.exports = {
         });
 
         var sanitized = _.map(cleaned, function(line) {
-            var replaced = line.replace(/(\.|\s{1,4})/g, ' ');
+            var replaced = line.replace(/(\.|\s{1,4}|-)/g, ' ');
             return replaced.split(' ');
         });
         

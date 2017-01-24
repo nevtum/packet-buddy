@@ -129,8 +129,12 @@ class MainLayout extends React.Component {
 
         return (
             <div id="layout">
+                <h1>Packet Buddy</h1>
                 {controls}
                 {content}
+                <div id="footer">
+                    <p>2017 - v1.0.1 - Powered by NT</p>
+                </div>
             </div>
         );
     }

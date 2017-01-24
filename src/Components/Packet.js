@@ -41,7 +41,7 @@ const PacketDetails = function(props) {
                     </tbody>
                 </table>
             </div>
-            <hr />            
+            <hr />
             <div className="meters">
                 <h5>Meters</h5>
                 <table>
