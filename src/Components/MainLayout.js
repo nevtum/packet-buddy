@@ -13,21 +13,21 @@ class MainLayout extends React.Component {
             decoded: [],
         }
 
-        this.setContent = this.setContent.bind(this);
-        this.showReadMode = this.showReadMode.bind(this);
-        this.showEditMode = this.showEditMode.bind(this);
+        this.onRawContentChanged = this.onRawContentChanged.bind(this);
+        this.onSwitchReadMode = this.onSwitchReadMode.bind(this);
+        this.onSwitchEditMode = this.onSwitchEditMode.bind(this);
     }
 
-    setContent(e) {
+    onRawContentChanged(e) {
         this.setState({ raw: e.target.value });
     }
 
-    showEditMode(e) {
+    onSwitchEditMode(e) {
         e.preventDefault();
         this.setState({ editMode: true });
     }
 
-    showReadMode(e) {
+    onSwitchReadMode(e) {
         e.preventDefault();
 
         // if text has not changed since last parse
@@ -46,7 +46,7 @@ class MainLayout extends React.Component {
     renderViewControls() {
         return (
             <div id="controls">
-                <a href="#" onClick={this.showReadMode}>Parse datablocks</a>
+                <a href="#" onClick={this.onSwitchReadMode}>Switch to read mode</a>
             </div>
         );
     }
@@ -54,7 +54,7 @@ class MainLayout extends React.Component {
     renderEditControls() {
         return (
             <div id="controls">
-                <a href="#" onClick={this.showEditMode}>Edit data</a>
+                <a href="#" onClick={this.onSwitchEditMode}>Switch to edit mode</a>
             </div>
         );
     }
@@ -71,7 +71,7 @@ class MainLayout extends React.Component {
             return(
                 <div id="content">
                     <textarea
-                        onChange={this.setContent}
+                        onChange={this.onRawContentChanged}
                         placeholder="paste datablocks here..."
                         value={this.state.raw}>
                     </textarea>
@@ -83,7 +83,6 @@ class MainLayout extends React.Component {
     }
 
     renderDecodedPackets() {
-
         var packets = this.state.decoded.map(function(element, index) {
             return <Packet key={index} data={element} />;
         });
