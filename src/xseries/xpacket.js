@@ -123,7 +123,12 @@ class XPacket {
                 RTP: this._percentage(119, 120),
             },
             meterData: {
-                // To do
+                turnover: this._currency(16, 20),
+                totalwins: this._currency(21, 25),
+                cashbox: this._currency(26, 30),
+                cancelledcredits : this._currency(31, 35),
+                moneyin: this._currency(41, 45),
+                moneyout: this._currency(46, 50),
             }
         };
     }

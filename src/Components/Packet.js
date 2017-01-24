@@ -15,7 +15,12 @@ const Packet = function(props) {
         "packet" : "packet invalid";
 
     let configTabulated = Object.keys(data.configData).map(function(key, index) {
-        return data.configData[key];
+        return Object.assign({}, data.configData[key], { description: key });
+    });
+
+    let metersTabulated = Object.keys(data.meterData).map(function(key, element) {
+        return Object.assign({}, data.meterData[key], { description: key });
+        
     });
 
     return (
@@ -29,6 +34,7 @@ const Packet = function(props) {
                 <table>
                     <tbody>
                         <tr>
+                            <th>Description</th>
                             <th>Byte Range</th>
                             <th>Hex</th>
                             <th>Interpretation</th>
@@ -36,6 +42,7 @@ const Packet = function(props) {
                         {configTabulated.map(function(element, index) {
                             return (
                                 <tr key={index}>
+                                    <td>{element.description}</td>
                                     <td>{element.byteRange}</td>
                                     <td>{element.hex}</td>
                                     <td>{element.value}</td>
@@ -46,9 +53,28 @@ const Packet = function(props) {
                 </table>
             </div>
             <hr />            
-            <div className="config">
+            <div className="meters">
                 <h5>Meters</h5>
-                <pre>{JSON.stringify(data.meterData, null, 2)}</pre>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Description</th>
+                            <th>Byte Range</th>
+                            <th>Hex</th>
+                            <th>Interpretation</th>
+                        </tr>
+                        {metersTabulated.map(function(element, index) {
+                            return (
+                                <tr key={index}>
+                                    <td>{element.description}</td>
+                                    <td>{element.byteRange}</td>
+                                    <td>{element.hex}</td>
+                                    <td>{element.value}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
