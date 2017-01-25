@@ -70,26 +70,26 @@ const PacketDetails = (props) => {
     );
 }
 
-const PacketHeader = function(props) {
+let getHeaderStyle = function(packetType) {
+    switch (packetType) {
+        case BlockTypes.SDB:
+            return { background: '#4bdcdc' };
 
-    let getHeaderStyle = function(packetType) {
-        switch (packetType) {
-            case BlockTypes.SDB:
-                return { background: '#4bdcdc' };
+        case BlockTypes.MDB:
+            return { background: 'gold' };
 
-            case BlockTypes.MDB:
-                return { background: 'gold' };
+        case BlockTypes.PDB1:
+            return { background: '#a284dc' };
 
-            case BlockTypes.PDB1:
-                return { background: '#a284dc' };
+        case BlockTypes.PDB2:
+            return { background: '#838ede' };
 
-            case BlockTypes.PDB2:
-                return { background: '#838ede' };
-
-            default:
-                break;
-        }
+        default:
+            break;
     }
+}
+
+const PacketHeader = function(props) {
 
     let collapse = function(e) {
         e.preventDefault();
@@ -105,20 +105,13 @@ const PacketHeader = function(props) {
 
     let style = getHeaderStyle(data.type);
 
-    if (!expanded) {
-        return (
-            <div className="summary" style={style} onClick={expand}>
-                <h3>{id+1}. {data.type}</h3>
-            </div>
-        );
-    }
-    else {
-        return (
-            <div className="summary" style={style} onClick={collapse}>
-                <h3>{id+1}. {data.type}</h3>
-            </div>
-        );
-    }
+    let onClickHandler = expanded ? collapse : expand;
+
+    return (
+        <div className="summary" style={style} onClick={onClickHandler}>
+            <h3>{id+1}. {data.type}</h3>
+        </div>
+    );
 }
 
 const Packet = function(props) {
