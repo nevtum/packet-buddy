@@ -1,4 +1,5 @@
 import React from 'react';
+import BlockTypes from '../xseries/blocktypes';
 
 const PacketDetails = (props) => {
 
@@ -73,16 +74,16 @@ const PacketHeader = function(props) {
 
     let getHeaderStyle = function(packetType) {
         switch (packetType) {
-            case 'SDB':
+            case BlockTypes.SDB:
                 return { background: '#4bdcdc' };
 
-            case 'MDB':
+            case BlockTypes.MDB:
                 return { background: 'gold' };
 
-            case 'PDB1':
+            case BlockTypes.PDB1:
                 return { background: '#a284dc' };
 
-            case 'PDB2':
+            case BlockTypes.PDB2:
                 return { background: '#838ede' };
 
             default:

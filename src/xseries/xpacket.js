@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var XBytes = require('./xbytes');
 var calc = require('../xseries/utilities');
+var BlockTypes = require('../xseries/blocktypes');
 
 class XPacket {
     constructor(byteArray) {
@@ -53,13 +54,13 @@ class XPacket {
     getType() {
         switch (this.byteArray[1]) {
             case 0x00:
-                return "SDB"
+                return BlockTypes.SDB;
             case 0x10:
-                return "PDB1"
+                return BlockTypes.PDB1;
             case 0x11:
-                return "PDB2"
+                return BlockTypes.PDB2;
             case 0x22:
-                return "MDB"
+                return BlockTypes.MDB;
         
             default:
                 return "UNKNOWN"
@@ -198,19 +199,19 @@ class XPacket {
     asJson() {
         let data = this._commonData();
 
-        if (data.type === "SDB") {
+        if (data.type === BlockTypes.SDB) {
             return Object.assign({}, data, this._SDBData());
         }
 
-        if (data.type === "PDB1") {
+        if (data.type === BlockTypes.PDB1) {
             return Object.assign({}, data, this._PDB1Data());
         }
 
-        if (data.type === "PDB2") {
+        if (data.type === BlockTypes.PDB2) {
             return Object.assign({}, data, this._PDB2Data());
         }
 
-        if (data.type === "MDB") {
+        if (data.type === BlockTypes.MDB) {
             return Object.assign({}, data, this._MDBData());
         }
 

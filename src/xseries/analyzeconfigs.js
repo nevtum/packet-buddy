@@ -1,9 +1,11 @@
 var RTPs = [];
 var BCVs = [];
 
+var BlockTypes = require('./blocktypes');
+
 module.exports = {
     record(xpacketJson) {
-        if (xpacketJson.type === "SDB" && xpacketJson.validCRC === true) {
+        if (xpacketJson.type === BlockTypes.SDB && xpacketJson.validCRC === true) {
             var rtpData = xpacketJson.configData.RTP;
             var rtp = rtpData.value;
 
