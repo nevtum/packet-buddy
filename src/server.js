@@ -1,12 +1,12 @@
-express = require('express');
-path = require('path');
+var express = require('express');
+var path = require('path');
 
-var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3000;
+let isProduction = process.env.NODE_ENV === 'production';
+let port = isProduction ? process.env.PORT : 3000;
 
-app = express();
+let app = express();
 
-var publicPath = path.resolve(__dirname, './public');
+let publicPath = path.resolve(__dirname, './public');
 app.use(express.static(publicPath));
 
 app.listen(port, function(err) {

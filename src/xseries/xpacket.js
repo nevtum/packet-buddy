@@ -25,10 +25,10 @@ class XPacket {
     }
 
     CalculateValidCRC(byteArray) {
-        var array = this.byteArray.slice(1, 126);
-        var expected = this.byteArray.slice(126, 128);
-        var checksum = calc.calculateChecksum(array);
-        var validCRC = _.isEqual(checksum, expected);
+        let array = this.byteArray.slice(1, 126);
+        let expected = this.byteArray.slice(126, 128);
+        let checksum = calc.calculateChecksum(array);
+        let validCRC = _.isEqual(checksum, expected);
         // console.log(validCRC);
         return validCRC;
     }
@@ -46,7 +46,7 @@ class XPacket {
             throw new Error("endByte param must be larger than startByte!")
         }
 
-        var slice = this.byteArray.slice(startByte, endByte + 1);
+        let slice = this.byteArray.slice(startByte, endByte + 1);
         return new XBytes(slice, startByte, endByte);
     }
 
@@ -67,7 +67,7 @@ class XPacket {
     }
     
     _percentage(startByte, endByte) {
-        var bytesObj = this.getBytes(startByte, endByte);
+        let bytesObj = this.getBytes(startByte, endByte);
 
         return {
             byteRange: startByte + '-' + endByte,
@@ -77,7 +77,7 @@ class XPacket {
     }
 
     _ASCII(startByte, endByte) {
-        var bytesObj = this.getBytes(startByte, endByte);
+        let bytesObj = this.getBytes(startByte, endByte);
 
         return {
             byteRange: startByte + '-' + endByte,            
@@ -87,7 +87,7 @@ class XPacket {
     }
 
     _currency(startByte, endByte) {
-        var bytesObj = this.getBytes(startByte, endByte);
+        let bytesObj = this.getBytes(startByte, endByte);
 
         return {
             byteRange: startByte + '-' + endByte,            
@@ -97,7 +97,7 @@ class XPacket {
     }
 
     _version(startByte, endByte) {
-        var bytesObj = this.getBytes(startByte, endByte);
+        let bytesObj = this.getBytes(startByte, endByte);
 
         return {
             byteRange: startByte + '-' + endByte,            
@@ -196,7 +196,7 @@ class XPacket {
     }
 
     asJson() {
-        var data = this._commonData();
+        let data = this._commonData();
 
         if (data.type === "SDB") {
             return Object.assign({}, data, this._SDBData());

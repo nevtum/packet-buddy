@@ -3,14 +3,14 @@ var Xpacket = require('./xpacket');
 
 module.exports = {
     toHexArrays(contents) {
-        var lines = contents.split('\n');
+        let lines = contents.split('\n');
         
-        var cleaned = _.filter(lines, function(line) {
+        let cleaned = _.filter(lines, function(line) {
             return line != '';
         });
 
-        var sanitized = _.map(cleaned, function(line) {
-            var replaced = line.replace(/(\.|\s{1,4}|-)/g, ' ');
+        let sanitized = _.map(cleaned, function(line) {
+            let replaced = line.replace(/(\.|\s{1,4}|-)/g, ' ');
             return replaced.split(' ');
         });
         
@@ -26,7 +26,7 @@ module.exports = {
     parse(contents, callback) {
         this.toByteArrays(contents).forEach(function(item) {
             try {
-                var packet = new Xpacket(item);
+                let packet = new Xpacket(item);
                 callback(null, packet);
             } catch (error) {
                 callback(error);

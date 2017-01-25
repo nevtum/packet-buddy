@@ -1,9 +1,9 @@
-var toHex = function(value) {
+let toHex = function(value) {
     return value.toString(16);
 }
 
-var toBCD = function(value) {
-    var converted = toHex(value)
+let toBCD = function(value) {
+    let converted = toHex(value)
     if (converted.length < 2) {
         converted = '0' + converted;
     }
@@ -38,7 +38,7 @@ class XBytes {
     }
 
     asVersion() {
-        var array = this.byteArray.map(function(byte) {
+        let array = this.byteArray.map(function(byte) {
             return toBCD(byte);
         });
 
@@ -55,7 +55,7 @@ class XBytes {
     }
 
     asPercentage() {
-        var array = this.asBCD();
+        let array = this.asBCD();
 
         array[0] = toHex(this.byteArray[0])
         array[0] += ".";
@@ -64,14 +64,14 @@ class XBytes {
     }
 
     asCurrency() {
-        var array = this.byteArray.map(function(byte) {
+        let array = this.byteArray.map(function(byte) {
             return toBCD(byte);
         });
 
-        var firstElems = array.slice(0, array.length - 1);
-        var cents = array[array.length - 1];
+        let firstElems = array.slice(0, array.length - 1);
+        let cents = array[array.length - 1];
 
-        var dollars = parseInt(firstElems.join(""));
+        let dollars = parseInt(firstElems.join(""));
 
         return "$" + dollars + "." + cents;
     }

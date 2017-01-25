@@ -1,7 +1,7 @@
 
-var ChecksumCalculator = {
+let ChecksumCalculator = {
     calculateChecksum(array) {
-        var mod = 0x00;
+        let mod = 0x00;
 
         array.forEach(function(element) {
             mod = mod ^ element;
