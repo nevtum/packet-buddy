@@ -16,12 +16,20 @@ body {
     background: #ecf1e7;
 }
 
-.packet {
-    margin-bottom: 15px;
+.summary {
+    padding: 2px 10px;
+    display: flex;
+    flex-flow: row;
+}
+
+.details {
     padding: 10px;
+}
+
+.packet {
+    margin-bottom: 12px;
     background: #f9f8ff;
     border: 1px solid mediumseagreen;
-    border-radius: 3px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 

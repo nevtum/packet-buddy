@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PacketDetails = function(props) {
+const PacketDetails = (props) => {
 
     let { data, expanded } = props;
 
@@ -70,6 +70,26 @@ const PacketDetails = function(props) {
 }
 
 const PacketHeader = function(props) {
+
+    let getHeaderStyle = function(packetType) {
+        switch (packetType) {
+            case 'SDB':
+                return { background: '#4bdcdc' };
+
+            case 'MDB':
+                return { background: 'gold' };
+
+            case 'PDB1':
+                return { background: '#a284dc' };
+
+            case 'PDB2':
+                return { background: '#838ede' };
+
+            default:
+                break;
+        }
+    }
+
     let collapse = function(e) {
         e.preventDefault();
         props.onViewCollapsed(props.id);
@@ -82,11 +102,21 @@ const PacketHeader = function(props) {
 
     let { id, data, expanded } = props;
 
+    let style = getHeaderStyle(data.type);
+
     if (!expanded) {
-        return <h3>{id+1}. <a href="#" onClick={expand}>{data.type}</a></h3>
+        return (
+            <div className="summary" style={style} onClick={expand}>
+                <h3>{id+1}. {data.type}</h3>
+            </div>
+        );
     }
     else {
-        return <h3>{id+1}. <a href="#" onClick={collapse}>{data.type}</a></h3>
+        return (
+            <div className="summary" style={style} onClick={collapse}>
+                <h3>{id+1}. {data.type}</h3>
+            </div>
+        );
     }
 }
 
@@ -106,9 +136,7 @@ const Packet = function(props) {
 
     return (
         <div className={classname}>
-            <div className="summary">
-                <PacketHeader {...props} />
-            </div>
+            <PacketHeader {...props} />
             <PacketDetails {...props} />
         </div>
     );
