@@ -27,6 +27,7 @@ body {
 }
 
 .packet {
+    max-width: 900px;
     margin-bottom: 12px;
     background: #f9f8ff;
     border: 1px solid mediumseagreen;
