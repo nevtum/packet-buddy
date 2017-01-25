@@ -4,6 +4,8 @@
 }
 
 #controls {
+    display: flex;
+    flex-flow: row;
 }
 
 #footer {

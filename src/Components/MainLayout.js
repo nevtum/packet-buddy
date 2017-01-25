@@ -13,6 +13,8 @@ class MainLayout extends React.Component {
             decoded: [],
         }
 
+        this.onAllCollapsed = this.onAllCollapsed.bind(this);
+        this.onAllExpanded = this.onAllExpanded.bind(this);
         this.onRawContentChanged = this.onRawContentChanged.bind(this);
         this.onSwitchReadMode = this.onSwitchReadMode.bind(this);
         this.onSwitchEditMode = this.onSwitchEditMode.bind(this);
@@ -20,14 +22,32 @@ class MainLayout extends React.Component {
         this.onItemExpanded = this.onItemExpanded.bind(this);
     }
 
+    onAllCollapsed(e) {
+        e.preventDefault();
+        let { decoded } = this.state;
+        decoded.forEach(function(element) {
+            element.expanded = false;
+        });
+        this.setState({ decoded: decoded });
+    }
+
+    onAllExpanded(e) {
+        e.preventDefault();
+        let { decoded } = this.state;
+        decoded.forEach(function(element) {
+            element.expanded = true;
+        });
+        this.setState({ decoded: decoded });
+    }
+
     onItemCollapsed(id) {
-        var { decoded } = this.state;
+        let { decoded } = this.state;
         decoded[id].expanded = false;
         this.setState({ decoded: decoded });
     }
 
     onItemExpanded(id) {
-        var { decoded } = this.state;
+        let { decoded } = this.state;
         decoded[id].expanded = true;
         this.setState({ decoded: decoded });
     }
@@ -67,7 +87,7 @@ class MainLayout extends React.Component {
         });
     }
 
-    renderViewControls() {
+    renderEditControls() {
         return (
             <div id="controls">
                 <a href="#" onClick={this.onSwitchReadMode}>Switch to read mode</a>
@@ -75,19 +95,29 @@ class MainLayout extends React.Component {
         );
     }
 
-    renderEditControls() {
+    renderViewControls() {
+
+        if (this.state.decoded.length > 1) {
+            var viewControls = (
+                <div>
+                    | <a href="#" onClick={this.onAllCollapsed}>Collapse All</a>
+                    | <a href="#" onClick={this.onAllExpanded}>Expand All</a>
+                </div>);
+        }
+
         return (
             <div id="controls">
-                <a href="#" onClick={this.onSwitchEditMode}>Switch to edit mode</a>
+                <a href="#" onClick={this.onSwitchEditMode}>Switch to edit mode </a>
+                {viewControls}
             </div>
         );
     }
 
     renderControls() {
         if (this.state.editMode == true) {
-            return this.renderViewControls();
+            return this.renderEditControls();
         }
-        return this.renderEditControls();
+        return this.renderViewControls();
     }
 
     renderContent() {
