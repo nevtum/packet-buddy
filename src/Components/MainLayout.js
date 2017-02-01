@@ -136,7 +136,7 @@ class MainLayout extends React.Component {
             );
         }
 
-           return this.renderDecodedPackets();
+        return this.renderDecodedPackets();
     }
 
     renderDecodedPackets() {
