@@ -33,13 +33,15 @@ module.exports = {
             }
         });
     },
-    parseAll(contents) {
-        return this.toByteArrays(contents).map(function(element) {
+    parseAll(contents, onSuccess) {
+        let xpackets = this.toByteArrays(contents).map(function(element) {
             try {
                 return new Xpacket(element).asJson();
             } catch (error) {
                 return { error: "Unable to process datablock!" }
             }
         });
+
+        onSuccess(xpackets);
     }
 };

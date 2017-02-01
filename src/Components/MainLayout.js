@@ -20,6 +20,23 @@ class MainLayout extends React.Component {
         this.onSwitchEditMode = this.onSwitchEditMode.bind(this);
         this.onItemCollapsed = this.onItemCollapsed.bind(this);
         this.onItemExpanded = this.onItemExpanded.bind(this);
+        this.onParseSuccess = this.onParseSuccess.bind(this);
+    }
+
+    onParseSuccess(data) {
+        let decoded = data.map(function(element, index) {
+            return {
+                id: index,
+                expanded: true,
+                data: element
+            }
+        });
+
+        this.setState({ 
+            editMode: false,
+            rawCache: this.state.raw,
+            decoded: decoded,
+        });
     }
 
     onAllCollapsed(e) {
@@ -70,21 +87,7 @@ class MainLayout extends React.Component {
             return;
         }
 
-        let decoded = decoder
-            .parseAll(this.state.raw)
-            .map(function(element, index) {
-                return {
-                    id: index,
-                    expanded: true,
-                    data: element
-                }
-            })
-
-        this.setState({ 
-            editMode: false,
-            rawCache: this.state.raw,
-            decoded: decoded,
-        });
+        decoder.parseAll(this.state.raw, this.onParseSuccess);
     }
 
     renderEditControls() {
