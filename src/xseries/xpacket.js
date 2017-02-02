@@ -115,6 +115,18 @@ class XPacket {
         };
     }
 
+    _digits(startByte, endByte) {
+        let bytesObj = this.getBytes(startByte, endByte);
+        let start = startByte + 1;
+        let end = endByte + 1;
+
+        return {
+            byteRange: start + '-' + end,            
+            hex: bytesObj.rawData(),
+            value: bytesObj.asDigits(),
+        };
+    }
+
     _SDBData() {
         return {
             configData: {
@@ -143,6 +155,13 @@ class XPacket {
                 cancelledcredits : this._currency(31, 35),
                 moneyin: this._currency(41, 45),
                 moneyout: this._currency(46, 50),
+                cashin: this._currency(51, 55),
+                cashout: this._currency(56, 60),
+                credits: this._currency(61, 65),
+                miscaccrual: this._digits(66, 70),
+                totalpowerups: this._digits(71, 74),
+                gamesplayedsincelastpowerup: this._digits(75, 78),
+                gamesplayedsincelastdooropen: this._digits(79, 82)
             }
         };
     }

@@ -37,6 +37,14 @@ class XBytes {
         return 0x1 & this.byteArray[0] >> bit;
     }
 
+    asDigits() {
+        let value = this.byteArray.map(function(byte) {
+            return toBCD(byte);
+        }).join("");
+
+        return parseInt(value);
+    }
+
     asVersion() {
         let array = this.byteArray.map(function(byte) {
             return toBCD(byte);
