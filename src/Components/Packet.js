@@ -120,7 +120,7 @@ const Packet = function(props) {
     if (data.error) {
         return (
             <div className="packet error">
-                <p>{data.error}</p>
+                <pre>{data.error}</pre>
             </div>
         );
     }

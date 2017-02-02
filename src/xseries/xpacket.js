@@ -44,7 +44,7 @@ class XPacket {
         }
 
         if (endByte < startByte) {
-            throw new Error("endByte param must be larger than startByte!")
+            throw new Error("endByte param must be larger than startByte!");
         }
 
         let slice = this.byteArray.slice(startByte, endByte + 1);
@@ -63,7 +63,7 @@ class XPacket {
                 return BlockTypes.MDB;
         
             default:
-                return "UNKNOWN"
+                throw new Error("Unknown packet type!");
         }
     }
     

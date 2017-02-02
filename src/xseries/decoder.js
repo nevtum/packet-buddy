@@ -38,7 +38,7 @@ module.exports = {
             try {
                 return new Xpacket(element).asJson();
             } catch (error) {
-                return { error: "Unable to process datablock!" }
+                return { error: error.stack }
             }
         });
 
