@@ -69,9 +69,11 @@ class XPacket {
     
     _percentage(startByte, endByte) {
         let bytesObj = this.getBytes(startByte, endByte);
+        let start = startByte + 1;
+        let end = endByte + 1;
 
         return {
-            byteRange: startByte + '-' + endByte,
+            byteRange: start + '-' + end,
             hex: bytesObj.rawData(),
             value: bytesObj.asPercentage(),
         };
@@ -79,9 +81,11 @@ class XPacket {
 
     _ASCII(startByte, endByte) {
         let bytesObj = this.getBytes(startByte, endByte);
+        let start = startByte + 1;
+        let end = endByte + 1;
 
         return {
-            byteRange: startByte + '-' + endByte,            
+            byteRange: start + '-' + end,             
             hex: bytesObj.rawData(),
             value: bytesObj.asASCII(),
         };
@@ -89,9 +93,11 @@ class XPacket {
 
     _currency(startByte, endByte) {
         let bytesObj = this.getBytes(startByte, endByte);
+        let start = startByte + 1;
+        let end = endByte + 1;
 
         return {
-            byteRange: startByte + '-' + endByte,            
+            byteRange: start + '-' + end,            
             hex: bytesObj.rawData(),
             value: bytesObj.asCurrency(),
         };
@@ -99,9 +105,11 @@ class XPacket {
 
     _version(startByte, endByte) {
         let bytesObj = this.getBytes(startByte, endByte);
+        let start = startByte + 1;
+        let end = endByte + 1;
 
         return {
-            byteRange: startByte + '-' + endByte,            
+            byteRange: start + '-' + end,            
             hex: bytesObj.rawData(),
             value: bytesObj.asVersion(),
         };
@@ -112,7 +120,7 @@ class XPacket {
             configData: {
                 version: this._version(2, 3),
                 MultiGameIndication: {
-                    byteRange: 14 + '-' + 15,
+                    byteRange: 15 + '-' + 16,
                     hex: this.getBytes(14, 15).rawData(),
                     value: this.getBytes(14, 15).asBCD().join(""),
                 },
@@ -122,6 +130,11 @@ class XPacket {
                 PID3: this._ASCII(103, 110),
                 PID4: this._ASCII(111, 118),
                 RTP: this._percentage(119, 120),
+                SecondaryFunction: {
+                    byteRange: "122",
+                    hex: this.getBytes(121).rawData(),
+                    value: this.getBytes(121).rawData()
+                }
             },
             meterData: {
                 turnover: this._currency(16, 20),
@@ -138,7 +151,11 @@ class XPacket {
         return {
             configData: {
                 version: this._version(2, 3),
-                NrLevels: this.getBytes(14).asSingleValue(),
+                NrLevels: {
+                    byteRange: "15",
+                    hex: this.getBytes(14).rawData(),
+                    value: this.getBytes(14).asSingleValue()
+                },
                 IncPCTLvl1: this._percentage(15, 18),
                 IncPCTLvl2: this._percentage(19, 22),
                 IncPCTLvl3: this._percentage(23, 26),
@@ -178,7 +195,7 @@ class XPacket {
         return {
             configData: {
                 ManufacturerID: {
-                    byteRange: "2",
+                    byteRange: "3",
                     hex: this.getBytes(2).rawData(),
                     value: this.getBytes(2).rawData()
                 } ,
