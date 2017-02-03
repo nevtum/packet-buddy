@@ -10,10 +10,24 @@ const ViewControls = (props) => {
             </div>);
     }
 
+    let filterControls;
+    // To do. Bind a filter function through props passed
+    if (props.filterOptions.length > 0) {
+        filterControls = props.filterOptions.map(function(element) {
+            return (
+                <li key={element}>
+                    <a href="#">{element}</a>
+                </li>);
+        })
+    }
+
     return (
         <div id="controls">
             <a href="#" onClick={props.onSwitchEditMode}>Switch to edit mode </a>
             {viewControls}
+            <ul>
+                {filterControls}
+            </ul>
         </div>
     );
 }

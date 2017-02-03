@@ -12,6 +12,7 @@ class MainLayout extends React.Component {
             raw: "",
             rawCache: "",
             decoded: [],
+            blockTypesFound: [],
         }
 
         this.onAllCollapsed = this.onAllCollapsed.bind(this);
@@ -110,7 +111,8 @@ class MainLayout extends React.Component {
                 decoded={this.state.decoded}
                 onAllCollapsed={this.onAllCollapsed}
                 onAllExpanded={this.onAllExpanded}
-                onSwitchEditMode={this.onSwitchEditMode} />
+                onSwitchEditMode={this.onSwitchEditMode}
+                filterOptions={this.state.blockTypesFound} />
         );
     }
 
