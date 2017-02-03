@@ -17,14 +17,6 @@ class XBytes {
         this.endByte = endByte;
     }
 
-    asSingleValue() {
-        if (this.startByte != this.endByte) {
-            throw new Error("startByte != endByte");
-        }
-
-        return this.byteArray[0];
-    }
-
     asStatusBit(bit) {
         if (this.startByte != this.endByte) {
             throw new Error("startByte != endByte");

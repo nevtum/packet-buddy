@@ -120,8 +120,12 @@ class XPacket {
         let start = startByte + 1;
         let end = endByte + 1;
 
+        let byteRange;
+        if (endByte == undefined) byteRange = start;
+        else byteRange = start + '-' + end;
+
         return {
-            byteRange: start + '-' + end,            
+            byteRange: byteRange,            
             hex: bytesObj.rawData(),
             value: bytesObj.asDigits(),
         };
@@ -149,19 +153,21 @@ class XPacket {
                 }
             },
             meterData: {
-                turnover: this._currency(16, 20),
-                totalwins: this._currency(21, 25),
-                cashbox: this._currency(26, 30),
-                cancelledcredits : this._currency(31, 35),
-                moneyin: this._currency(41, 45),
-                moneyout: this._currency(46, 50),
-                cashin: this._currency(51, 55),
-                cashout: this._currency(56, 60),
-                credits: this._currency(61, 65),
-                miscaccrual: this._digits(66, 70),
-                totalpowerups: this._digits(71, 74),
-                gamesplayedsincelastpowerup: this._digits(75, 78),
-                gamesplayedsincelastdooropen: this._digits(79, 82)
+                SeqNr: this._digits(4),
+                GMID: this._digits(5, 7),
+                Turnover: this._currency(16, 20),
+                Totalwins: this._currency(21, 25),
+                Cashbox: this._currency(26, 30),
+                CancelledCredits : this._currency(31, 35),
+                MoneyIn: this._currency(41, 45),
+                MoneyOut: this._currency(46, 50),
+                CashIn: this._currency(51, 55),
+                CashOut: this._currency(56, 60),
+                Credits: this._currency(61, 65),
+                MiscAccrual: this._currency(66, 70),
+                TotalPowerUps: this._digits(71, 74),
+                GamesSinceLastPowerUp: this._digits(75, 78),
+                GamesSinceLastDoorOpen: this._digits(79, 82)
             }
         };
     }
@@ -170,11 +176,7 @@ class XPacket {
         return {
             configData: {
                 version: this._version(2, 3),
-                NrLevels: {
-                    byteRange: "15",
-                    hex: this.getBytes(14).rawData(),
-                    value: this.getBytes(14).asSingleValue()
-                },
+                NrLevels: this._digits(14),
                 IncPCTLvl1: this._percentage(15, 18),
                 IncPCTLvl2: this._percentage(19, 22),
                 IncPCTLvl3: this._percentage(23, 26),
@@ -213,14 +215,31 @@ class XPacket {
     _MDBData() {
         return {
             configData: {
-                ManufacturerID: {
-                    byteRange: "3",
-                    hex: this.getBytes(2).rawData(),
-                    value: this.getBytes(2).rawData()
-                } ,
+                ManufacturerID: this._digits(2),
+                DataBlockVersion: {
+                    byteRange: "8 - 9",
+                    hex: this.getBytes(7, 8).rawData(),
+                    value: this.getBytes(7, 8).rawData()
+                },
+                Version: this._version(9, 10)
             },
             meterData: {
-                // To do
+                GMID: this._digits(4, 6),
+                Nr5DollarBills: this._digits(15, 19),
+                Nr10DollarBills: this._digits(20, 24),
+                Nr20DollarBills: this._digits(25, 29),
+                Nr50DollarBills: this._digits(30, 34),
+                Nr100DollarBills: this._digits(35, 39),
+                NrTicketsAccepted: this._digits(40, 44),
+                NrTicketsRejected: this._digits(45, 49),
+                NrSpareBills: this._digits(50, 54),
+                TotalBillValue: this._currency(55, 59),
+                TotalBillsAccepted: this._digits(60, 64),
+                DateTicketPrinted: {},
+                TimeTicketPrinted: {},
+                TicketID: this._digits(73, 82),
+                TicketValue: this._currency(83, 87),
+                TicketSeqNr: this._digits(88, 92)
             }
         };
     }
