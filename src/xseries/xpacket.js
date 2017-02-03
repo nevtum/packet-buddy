@@ -134,7 +134,7 @@ class XPacket {
     _SDBData() {
         return {
             configData: {
-                version: this._version(2, 3),
+                Version: this._version(2, 3),
                 MultiGameIndication: {
                     byteRange: 15 + '-' + 16,
                     hex: this.getBytes(14, 15).rawData(),
@@ -175,7 +175,7 @@ class XPacket {
     _PDB1Data() {
         return {
             configData: {
-                version: this._version(2, 3),
+                Version: this._version(2, 3),
                 NrLevels: this._digits(14),
                 IncPCTLvl1: this._percentage(15, 18),
                 IncPCTLvl2: this._percentage(19, 22),
@@ -207,7 +207,7 @@ class XPacket {
     _PDB2Data() {
         return {
             configData: {
-                version: this._version(2, 3),
+                Version: this._version(2, 3),
                 ResetLvl1: this._currency(10, 14),
                 ResetLvl2: this._currency(15, 19),
                 ResetLvl3: this._currency(20, 24),
@@ -218,7 +218,31 @@ class XPacket {
                 LimitLvl4: this._currency(45, 49),
             },
             meterData: {
-                // To do
+                SeqNr: this._digits(4),
+                GMID: this._digits(5, 7),
+
+                ResetAmountLvl1: this._currency(10, 14),
+                ResetAmountLvl2: this._currency(15, 19),
+                ResetAmountLvl3: this._currency(20, 24),
+                ResetAmountLvl4: this._currency(25, 29),
+                CeilingValueLvl1: this._currency(30, 34),
+                CeilingValueLvl2: this._currency(35, 39),
+                CeilingValueLvl3: this._currency(40, 44),
+                CeilingValueLvl4: this._currency(45, 49),
+                HiddenAmountLvl1: this._currency(50, 54),
+                HiddenAmountLvl2: this._currency(55, 59),
+                HiddenAmountLvl3: this._currency(60, 64),
+                HiddenAmountLvl4: this._currency(65, 69),
+                NrResetsLvl1: this._digits(70, 74),
+                NrResetsLvl2: this._digits(75, 79),
+                NrResetsLvl3: this._digits(80, 84),
+                NrResetsLvl4: this._digits(85, 89),
+                AmountWonLvl1: this._digits(90, 94),
+                AmountWonLvl2: this._digits(95, 99),
+                AmountWonLvl3: this._digits(100, 104),
+                AmountWonLvl4: this._digits(105, 109),
+                TurnoverSinceStartup: this._currency(110, 114),
+                TurnoverSinceConfigChange: this._currency(115, 119)
             }
         };
     }
