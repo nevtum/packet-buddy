@@ -188,7 +188,18 @@ class XPacket {
                 PID4: this._ASCII(95, 102),
             },
             meterData: {
-                // To do
+                SeqNr: this._digits(4),
+                GMID: this._digits(5, 7),
+                ConnectedEGMS: this._digits(35, 36),
+                DisconnectedEGMS: this._digits(38, 39),
+                CurrentAmountLvl1: this._currency(41, 45),
+                CurrentAmountLvl2: this._currency(46, 50),
+                CurrentAmountLvl3: this._currency(51, 55),
+                CurrentAmountLvl4: this._currency(56, 60),
+                CurrentLevelWon: this._digits(61),
+                CurrentGMIDWon: this._digits(62, 64),
+                WinAmountPendingReset: this._currency(65, 69),
+                NrJackpotsPendingReset: this._digits(70)
             }
         };
     }
