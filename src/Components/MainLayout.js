@@ -167,7 +167,7 @@ class MainLayout extends React.Component {
                 {controls}
                 {content}
                 <div id="footer">
-                    <p>2017 - v1.0.2 - Powered by NT</p>
+                    <p>2017 - v1.0.3 - Powered by NT</p>
                 </div>
             </div>
         );
