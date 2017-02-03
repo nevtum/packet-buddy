@@ -1,6 +1,7 @@
 import React from 'react';
 import decoder from '../xseries/decoder';
 import Packet from './Packet';
+import ViewControls from './ViewPageControls';
 
 class MainLayout extends React.Component {
     constructor(props, context) {
@@ -99,29 +100,18 @@ class MainLayout extends React.Component {
         );
     }
 
-    renderViewControls() {
-
-        if (this.state.decoded.length > 1) {
-            var viewControls = (
-                <div>
-                    | <a href="#" onClick={this.onAllCollapsed}>Collapse All</a>
-                    | <a href="#" onClick={this.onAllExpanded}>Expand All</a>
-                </div>);
-        }
-
-        return (
-            <div id="controls">
-                <a href="#" onClick={this.onSwitchEditMode}>Switch to edit mode </a>
-                {viewControls}
-            </div>
-        );
-    }
-
     renderControls() {
         if (this.state.editMode == true) {
             return this.renderEditControls();
         }
-        return this.renderViewControls();
+        
+        return (
+            <ViewControls
+                decoded={this.state.decoded}
+                onAllCollapsed={this.onAllCollapsed}
+                onAllExpanded={this.onAllExpanded}
+                onSwitchEditMode={this.onSwitchEditMode} />
+        );
     }
 
     renderContent() {
