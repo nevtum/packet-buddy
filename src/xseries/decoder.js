@@ -1,30 +1,34 @@
 var _ = require('lodash');
 var Xpacket = require('./xpacket');
 
-module.exports = {
-    toHexArrays(contents) {
-        let lines = contents.split('\n');
+function toHexArrays(contents) {
+    let lines = contents.split('\n');
         
-        let cleaned = _.filter(lines, function(line) {
-            return line != '';
-        });
+    let cleaned = _.filter(lines, function(line) {
+        return line != '';
+    });
 
-        let sanitized = _.map(cleaned, function(line) {
-            let replaced = line.replace(/(\.|\s{1,4}|-)/g, ' ');
-            return replaced.split(' ');
+    let sanitized = _.map(cleaned, function(line) {
+        let replaced = line.replace(/(\.|\s{1,4}|-)/g, ' ');
+        return replaced.split(' ');
+    });
+    
+    return sanitized;
+}
+
+function toByteArrays(contents) {
+    return _.map(toHexArrays(contents), function(item) {
+        return _.map(item, function(str) {
+            return parseInt(str, 16);
         });
-        
-        return sanitized;
-    },
-    toByteArrays(contents) {
-        return _.map(this.toHexArrays(contents), function(item) {
-            return _.map(item, function(str) {
-                return parseInt(str, 16);
-            });
-        });
-    },
+    });
+}
+
+module.exports = {
+    toHexArrays,
+    toByteArrays,
     parse(contents, callback) {
-        this.toByteArrays(contents).forEach(function(item) {
+        toByteArrays(contents).forEach(function(item) {
             try {
                 let packet = new Xpacket(item);
                 callback(null, packet);
@@ -34,14 +38,19 @@ module.exports = {
         });
     },
     parseAll(contents, onSuccess) {
-        let xpackets = this.toByteArrays(contents).map(function(element) {
+        return new Promise(function(resolve, reject) {
             try {
-                return new Xpacket(element).asJson();
+                let xpackets = toByteArrays(contents).map(function(element) {
+                    try {
+                        return new Xpacket(element).asJson();
+                    } catch (error) {
+                        return { error: error.stack }
+                    }
+                });
+                resolve(xpackets);
             } catch (error) {
-                return { error: error.stack }
+                reject(error);
             }
         });
-
-        onSuccess(xpackets);
     }
 };

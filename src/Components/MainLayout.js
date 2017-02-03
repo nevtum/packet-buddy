@@ -32,7 +32,7 @@ class MainLayout extends React.Component {
             }
         });
 
-        this.setState({ 
+        this.setState({
             editMode: false,
             rawCache: this.state.raw,
             decoded: decoded,
@@ -87,7 +87,8 @@ class MainLayout extends React.Component {
             return;
         }
 
-        decoder.parseAll(this.state.raw, this.onParseSuccess);
+        decoder.parseAll(this.state.raw)
+            .then(this.onParseSuccess);
     }
 
     renderEditControls() {
