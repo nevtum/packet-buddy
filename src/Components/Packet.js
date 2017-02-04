@@ -132,7 +132,6 @@ const Packet = function(props) {
     }
 
     if (excludedPacketClasses.indexOf(data.type) > -1) {
-        console.log(data.type);
         classNameArray.push("hide");
     }
 

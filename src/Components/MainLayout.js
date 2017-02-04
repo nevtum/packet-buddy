@@ -183,11 +183,10 @@ class MainLayout extends React.Component {
         return (
             <div id="layout">
                 <h1>Packet Buddy</h1>
-                <pre>{JSON.stringify(this.state.filter)}</pre>
                 {controls}
                 {content}
                 <div id="footer">
-                    <p>2017 - v1.0.3 - Powered by NT</p>
+                    <p>2017 - v1.1.0 - Powered by NT</p>
                 </div>
             </div>
         );
