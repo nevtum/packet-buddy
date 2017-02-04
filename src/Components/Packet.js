@@ -131,7 +131,6 @@ const Packet = function(props) {
         classNameArray.push("invalid");
     }
 
-
     if (excludedPacketClasses.indexOf(data.type) > -1) {
         console.log(data.type);
         classNameArray.push("hide");
