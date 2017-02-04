@@ -14,8 +14,8 @@ class MainLayout extends React.Component {
             rawCache: "",
             decoded: [],
             filter: {
-                allOptions: ["SDB", "PDB1"],
-                offOptions: ["SDB"]
+                allOptions: ["SDB", "PDB1", "PDB2", "MDB"],
+                offOptions: []
             }
         }
 
@@ -27,6 +27,21 @@ class MainLayout extends React.Component {
         this.onItemCollapsed = this.onItemCollapsed.bind(this);
         this.onItemExpanded = this.onItemExpanded.bind(this);
         this.onParseSuccess = this.onParseSuccess.bind(this);
+        this.onToggleFilter = this.onToggleFilter.bind(this);
+    }
+
+    onToggleFilter(packetType) {
+        console.log(packetType);
+        let newFilter = Object.assign({}, this.state.filter);
+        
+        let index = newFilter.offOptions.indexOf(packetType);
+        if (index == -1) {
+            newFilter.offOptions = [...newFilter.offOptions, packetType];
+        }
+        else {
+            newFilter.offOptions.splice(index, 1);
+        }
+            this.setState({ filter: newFilter });
     }
 
     onParseSuccess(data) {
@@ -117,7 +132,9 @@ class MainLayout extends React.Component {
                     onAllCollapsed={this.onAllCollapsed}
                     onAllExpanded={this.onAllExpanded}
                     onSwitchEditMode={this.onSwitchEditMode} />
-                <FilterToggleControl {...this.state.filter} />
+                <FilterToggleControl
+                    onToggleFilter={this.onToggleFilter}
+                    {...this.state.filter} />
             </div>
         );
     }
