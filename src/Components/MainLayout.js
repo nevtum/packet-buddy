@@ -9,11 +9,14 @@ class MainLayout extends React.Component {
         super(props, context);
 
         this.state = {
-            editMode: true,
+            editMode: false,
             raw: "",
             rawCache: "",
             decoded: [],
-            blockTypesFound: [],
+            filter: {
+                allOptions: ["SDB", "PDB1"],
+                offOptions: ["SDB"]
+            }
         }
 
         this.onAllCollapsed = this.onAllCollapsed.bind(this);
@@ -114,7 +117,7 @@ class MainLayout extends React.Component {
                     onAllCollapsed={this.onAllCollapsed}
                     onAllExpanded={this.onAllExpanded}
                     onSwitchEditMode={this.onSwitchEditMode} />
-                <FilterToggleControl filterOptions={this.state.blockTypesFound} />
+                <FilterToggleControl {...this.state.filter} />
             </div>
         );
     }
