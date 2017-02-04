@@ -2,6 +2,7 @@ import React from 'react';
 import decoder from '../xseries/decoder';
 import Packet from './Packet';
 import ViewControls from './ViewPageControls';
+import FilterToggleControl from './FilterToggleControl';
 
 class MainLayout extends React.Component {
     constructor(props, context) {
@@ -107,12 +108,14 @@ class MainLayout extends React.Component {
         }
         
         return (
-            <ViewControls
-                decoded={this.state.decoded}
-                onAllCollapsed={this.onAllCollapsed}
-                onAllExpanded={this.onAllExpanded}
-                onSwitchEditMode={this.onSwitchEditMode}
-                filterOptions={this.state.blockTypesFound} />
+            <div id="controls">
+                <ViewControls
+                    decoded={this.state.decoded}
+                    onAllCollapsed={this.onAllCollapsed}
+                    onAllExpanded={this.onAllExpanded}
+                    onSwitchEditMode={this.onSwitchEditMode} />
+                <FilterToggleControl filterOptions={this.state.blockTypesFound} />
+            </div>
         );
     }
 
