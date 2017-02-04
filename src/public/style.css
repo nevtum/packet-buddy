@@ -8,6 +8,9 @@
     flex-flow: column;
 }
 
+.hide {
+    display: none;
+}
 
 /*Starting to get a bit unmanagable*/
 #controls a {

@@ -115,7 +115,7 @@ const PacketHeader = function(props) {
 }
 
 const Packet = function(props) {
-    let { data } = props;
+    let { data, excludedPacketClasses } = props;
 
     if (data.error) {
         return (
@@ -125,8 +125,19 @@ const Packet = function(props) {
         );
     }
 
-    let classname = data.validCRC == true ? 
-        "packet" : "packet invalid";
+    let classNameArray = ["packet"];
+
+    if (!data.validCRC) {
+        classNameArray.push("invalid");
+    }
+
+
+    if (excludedPacketClasses.indexOf(data.type) > -1) {
+        console.log(data.type);
+        classNameArray.push("hide");
+    }
+
+    let classname = classNameArray.join(" ");
 
     return (
         <div className={classname}>

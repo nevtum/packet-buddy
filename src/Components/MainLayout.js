@@ -9,7 +9,7 @@ class MainLayout extends React.Component {
         super(props, context);
 
         this.state = {
-            editMode: false,
+            editMode: true,
             raw: "",
             rawCache: "",
             decoded: [],
@@ -144,6 +144,7 @@ class MainLayout extends React.Component {
             return <Packet
                         onViewCollapsed={this.onItemCollapsed}
                         onViewExpanded={this.onItemExpanded}
+                        excludedPacketClasses={this.state.filter.offOptions}
                         key={element.id}
                         {...element} />;
         }, this);
