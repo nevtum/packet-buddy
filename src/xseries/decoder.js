@@ -40,14 +40,29 @@ module.exports = {
     parseAll(contents, onSuccess) {
         return new Promise(function(resolve, reject) {
             try {
+                let typesFound = [];
+
                 let xpackets = toByteArrays(contents).map(function(element) {
                     try {
-                        return new Xpacket(element).asJson();
+                        let xpacket = new Xpacket(element);
+                        let type = xpacket.getType();
+
+                        if (typesFound.indexOf(type) === -1) {
+                            typesFound.push(type);
+                        }
+
+                        return xpacket.asJson();
                     } catch (error) {
                         return { error: error.stack }
                     }
                 });
-                resolve(xpackets);
+
+                let results = {
+                    typesFound: typesFound,
+                    packets: xpackets
+                };
+
+                resolve(results);
             } catch (error) {
                 reject(error);
             }

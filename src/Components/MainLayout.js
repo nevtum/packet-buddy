@@ -31,21 +31,20 @@ class MainLayout extends React.Component {
     }
 
     onToggleFilter(packetType) {
-        console.log(packetType);
         let newFilter = Object.assign({}, this.state.filter);
-        
         let index = newFilter.offOptions.indexOf(packetType);
+        
         if (index == -1) {
             newFilter.offOptions = [...newFilter.offOptions, packetType];
         }
         else {
             newFilter.offOptions.splice(index, 1);
         }
-            this.setState({ filter: newFilter });
+        this.setState({ filter: newFilter });
     }
 
     onParseSuccess(data) {
-        let decoded = data.map(function(element, index) {
+        let decoded = data.packets.map(function(element, index) {
             return {
                 id: index,
                 expanded: true,
@@ -57,6 +56,10 @@ class MainLayout extends React.Component {
             editMode: false,
             rawCache: this.state.raw,
             decoded: decoded,
+            filter: {
+                allOptions: data.typesFound,
+                offOptions: []
+            }
         });
     }
 
