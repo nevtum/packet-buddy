@@ -14,7 +14,7 @@ class MainLayout extends React.Component {
             rawCache: "",
             decoded: [],
             filter: {
-                allOptions: ["SDB", "PDB1", "PDB2", "MDB"],
+                allOptions: [],
                 offOptions: []
             }
         }
