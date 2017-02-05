@@ -1,5 +1,6 @@
 import React from 'react';
 import BlockTypes from '../xseries/blocktypes';
+import './packet.css';
 
 const PacketDetails = (props) => {
 
