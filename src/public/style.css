@@ -34,12 +34,12 @@
     text-decoration: none;
     padding: .2em 1em;
     color: #fff;
-    background-color: #1d8e2b;
+    background-color: #5cc17b;
 }
 
 #controls ul > li > a:hover {
     color: #fff;
-    background-color: #5cc17b;
+    background-color: #1d8e2b;
 }
 
 #controls ul > li.off > a {
@@ -91,7 +91,6 @@ body {
 
 table {
     width: 100%;
-    border: 1px;
     text-align: left;
 }
 

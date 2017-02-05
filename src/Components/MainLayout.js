@@ -3,6 +3,7 @@ import decoder from '../xseries/decoder';
 import Packet from './Packet';
 import ViewControls from './ViewPageControls';
 import FilterToggleControl from './FilterToggleControl';
+import '../public/style.css';
 
 class MainLayout extends React.Component {
     constructor(props, context) {

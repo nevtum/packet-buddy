@@ -19,13 +19,18 @@ var config = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
-  module : {
-    loaders : [
+  module: {
+    loaders: [
       {
-        test : /\.jsx?/,
-        include : APP_DIR,
+        test: /\.jsx?/,
+        include: APP_DIR,
         exclude: /node_modules/,
-        loaders : ['react-hot', 'babel']
+        loaders: ['react-hot', 'babel']
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader'
       }
     ]
   }
