@@ -29,18 +29,29 @@ class XBytes {
         return 0x1 & this.byteArray[0] >> bit;
     }
 
-    asDigits() {
-        let value = this.byteArray.map(function(byte) {
-            return toBCD(byte);
-        }).join("");
+    asDate() {
+        let bcd = this.byteArray.map((byte) => toBCD(byte));
+        let date = parseInt(bcd[0]);
+        let month = parseInt(bcd[1]);
+        let year = parseInt([bcd[2], bcd[3]].join(""))
+        return date + "/" + month + "/" + year;
+    }
 
+    asTime() {
+        let bcd = this.byteArray.map((byte) => toBCD(byte));
+        let hours = parseInt(bcd[0]);
+        let minutes = parseInt(bcd[1]);
+        let seconds = parseInt(bcd[2]);
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    asDigits() {
+        let value = this.byteArray.map((byte) => toBCD(byte)).join("");
         return parseInt(value);
     }
 
     asVersion() {
-        let array = this.byteArray.map(function(byte) {
-            return toBCD(byte);
-        });
+        let array = this.byteArray.map((byte) => toBCD(byte));
 
         array[0] = toHex(this.byteArray[0])
         array[0] += ".";
@@ -49,9 +60,7 @@ class XBytes {
     }
 
     asBCD() {
-        return this.byteArray.map(function(byte) {
-            return toBCD(byte);
-        });
+        return this.byteArray.map((byte) => toBCD(byte));
     }
 
     asPercentage() {
@@ -64,9 +73,7 @@ class XBytes {
     }
 
     asCurrency() {
-        let array = this.byteArray.map(function(byte) {
-            return toBCD(byte);
-        });
+        let array = this.byteArray.map((byte) => toBCD(byte));
 
         let firstElems = array.slice(0, array.length - 1);
         let cents = array[array.length - 1];
@@ -77,9 +84,9 @@ class XBytes {
     }
 
     asASCII() {
-        return this.byteArray.map(function(byte) {
-            return String.fromCharCode(byte);
-        }).join("")
+        return this.byteArray
+            .map((byte) => String.fromCharCode(byte))
+            .join("")
     }
 
     rawData() {

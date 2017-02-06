@@ -270,8 +270,16 @@ class XPacket {
                 NrSpareBills: this._digits(50, 54),
                 TotalBillValue: this._currency(55, 59),
                 TotalBillsAccepted: this._digits(60, 64),
-                DateTicketPrinted: {},
-                TimeTicketPrinted: {},
+                DateTicketPrinted: {
+                    byteRange: "67 - 70",
+                    hex: this.getBytes(66, 69).asDate(),
+                    value: this.getBytes(66, 69).rawData()
+                },
+                TimeTicketPrinted: {
+                    byteRange: "71 - 73",
+                    hex: this.getBytes(70, 72).asTime(),
+                    value: this.getBytes(70, 72).rawData()
+                },
                 TicketID: this._digits(73, 82),
                 TicketValue: this._currency(83, 87),
                 TicketSeqNr: this._digits(88, 92)
