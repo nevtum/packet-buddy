@@ -220,15 +220,6 @@ class XPacket {
             meterData: {
                 SeqNr: this._digits(4),
                 GMID: this._digits(5, 7),
-
-                ResetAmountLvl1: this._currency(10, 14),
-                ResetAmountLvl2: this._currency(15, 19),
-                ResetAmountLvl3: this._currency(20, 24),
-                ResetAmountLvl4: this._currency(25, 29),
-                CeilingValueLvl1: this._currency(30, 34),
-                CeilingValueLvl2: this._currency(35, 39),
-                CeilingValueLvl3: this._currency(40, 44),
-                CeilingValueLvl4: this._currency(45, 49),
                 HiddenAmountLvl1: this._currency(50, 54),
                 HiddenAmountLvl2: this._currency(55, 59),
                 HiddenAmountLvl3: this._currency(60, 64),
