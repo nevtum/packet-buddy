@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "mocha --watch src/unittests/test.js",
-    "server": "nodemon --watch server --exec babel-node -- src/server.js"
+    "server": "nodemon --watch server --exec babel-node -- src/server.js",
+    "build": "webpack src/index.js"
   },
   "author": "Neville Tummon",
   "license": "MIT",
